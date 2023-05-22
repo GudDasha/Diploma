@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/icon_main"
+        android:title="@string/icon_main"
+        android:icon="@drawable/garage_grey"></item>
+    <item
+        android:id="@+id/icon_study"
+        android:title="@string/icon_study"
+        android:icon="@drawable/book_grey"></item>
+
+    <item
+        android:id="@+id/icon_profile"
+        android:title="@string/icon_profile"
+        android:icon="@drawable/profile_grey"></item>
+</menu>

@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Just_drive</string>
+    <string name="program_name">Just drive</string>
+    <string name="icon_main">Главная</string>
+    <string name="icon_study">Обучение</string>
+    <string name="icon_schools">Автошколы</string>
+    <string name="icon_profile">Профиль</string>
+    <string name="login">Эл.почта</string>
+    <string name="password">Пароль</string>
+    <string name="go_in">Войти</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="phone">Телефон</string>
+    <string name="authorization">Авторизоваться</string>
+    <string name="training">Тренировка</string>
+    <string name="list_bulets">Список билетов</string>
+    <string name="setting">Настроить тестирование</string>
+    <string name="next">Далее</string>
+    <string name="back_to_bulets">Вернуться к билетам</string>
+    <string name="questions">Вопросы</string>
+    <string name="bulets">Билеты</string>
+    <string name="exam">Экзамен</string>
+    <string name="marafon">Марафон</string>
+    <string name="error">Ошибки</string>
+    <string name="sign_out">Выйти</string>
+    <string name="results">Результаты</string>
+    <string name="profile">Профиль</string>
+    <string name="study">Обучение</string>
+    <string name="rules">Правила дорожного движения</string>
+    <string name="signs">Дорожные знаки</string>
+    <string name="name">Имя</string>
+    <string name="title_activity_training_settings">TrainingSettings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="settings">Настройка</string>
+    <string name="back_to_main">Вернуться на главную</string>
+    <string name="videos">Видеоуроки</string>
+    <string name="statistic">Статистика</string>
+</resources>
