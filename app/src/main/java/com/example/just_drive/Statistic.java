@@ -32,12 +32,6 @@ public class Statistic extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycle_settings);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(Statistic.this));
-        TextView correct = findViewById(R.id.correct);
-        TextView date = findViewById(R.id.date);
-        TextView mistakes = findViewById(R.id.uncorrect);
-        TextView result = findViewById(R.id.type);
-        //adapter = new StateStatisticAdapter(this,recyclerList);
-        //recyclerView.setAdapter(adapter);
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference database = db.child("Users").child(currentUser).child("Results");
@@ -46,12 +40,10 @@ public class Statistic extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 recyclerList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.child("Билет № 1").getChildren()) {
-                    // StateStatistic state = dataSnapshot.getValue(StateStatistic.class);
-                    //recyclerList.add(state);
-                    final String getCorrect = dataSnapshot.child("correct").getValue(String.class);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    final Integer getCorrect = dataSnapshot.child("correct").getValue(Integer.class);
                     final String getDate = dataSnapshot.child("date").getValue(String.class);
-                    final String getMistake = dataSnapshot.child("mistakes").getValue(String.class);
+                    final Integer getMistake = dataSnapshot.child("mistakes").getValue(Integer.class);
                     final String getResult = dataSnapshot.child("result").getValue(String.class);
                     StateStatistic state = new StateStatistic(getCorrect, getDate, getMistake, getResult);
                     recyclerList.add(state);

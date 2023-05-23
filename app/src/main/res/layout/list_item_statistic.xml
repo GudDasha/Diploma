@@ -2,10 +2,9 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
     android:layout_height="100dp"
-    android:layout_gravity="center"
-    android:layout_margin="5dp"
+    android:layout_margin="15dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
 
@@ -16,48 +15,88 @@
         android:weightSum="2"
         android:orientation="horizontal">
        <LinearLayout
-           android:layout_width="0dp"
+           android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical"
            android:layout_weight="1"
+           android:weightSum="2"
            android:gravity="center">
            <TextView
+               android:layout_weight="1"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+               android:layout_height="match_parent"
                android:id="@+id/date"
+               android:gravity="center"
+               android:layout_gravity="center"
                android:textColor="#373333"
                android:text="testing_date"
-               android:layout_marginBottom="10dp"
-               android:textSize="20dp"></TextView>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/correct"
-               android:textColor="#373333"
-               android:text="testing_correct"
-               android:textSize="20dp"></TextView>
+               android:padding="5dp"
+               android:textSize="15dp"></TextView>
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_weight="1"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:gravity="center">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#373333"
+                   android:padding="5dp"
+                   android:layout_marginLeft="18dp"
+                   android:text="Правильно:"
+                   android:textSize="15dp"></TextView>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/correct"
+                   android:textColor="#373333"
+                   android:padding="5dp"
+                   android:text="correct"
+                   android:textSize="15dp"></TextView>
+           </LinearLayout>
+
        </LinearLayout>
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:weightSum="2">
             <TextView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/type"
                 android:textColor="#373333"
+                android:padding="5dp"
                 android:text="testing_type"
-                android:layout_marginBottom="10dp"
-                android:textSize="20dp"></TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#373333"
-                android:id="@+id/uncorrect"
-                android:text="testing_uncorrect"
-                android:textSize="20dp"></TextView>
+                android:gravity="center"
+                android:textSize="15dp"></TextView>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#373333"
+                    android:padding="5dp"
+                    android:text="Неправильно"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#373333"
+                    android:padding="5dp"
+                    android:id="@+id/uncorrect"
+                    android:text="uncorrect"
+                    android:textSize="15dp"></TextView>
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

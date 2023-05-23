@@ -3,10 +3,10 @@ package com.example.just_drive;
 public class StateStatistic {
     String date;
     String result;
-    String correct;
-    String mistakes;
+    int correct;
+    int mistakes;
 
-    public StateStatistic( String correct,String date,String mistakes,String result){
+    public StateStatistic( int correct,String date,int mistakes,String result){
         this.date = date;
         this.result = result;
         this.correct = correct;
@@ -24,12 +24,12 @@ public class StateStatistic {
     public  void setResult(String result) {
         this.result=result;
     }
-    public String getCorrect(){return  correct;}
-    public  void setCorrect(String correct) {
+    public Integer getCorrect(){return  correct;}
+    public  void setCorrect(Integer correct) {
         this.correct=correct;
     }
-    public String getMistakes(){return  mistakes;}
-    public  void setMistakes(String mistakes) {
+    public Integer getMistakes(){return  mistakes;}
+    public  void setMistakes(Integer mistakes) {
         this.mistakes=mistakes;
     }
 

@@ -16,25 +16,26 @@ import java.util.List;
 
 public class StateStatisticAdapter extends RecyclerView.Adapter<StateStatisticAdapter.ViewHolder> {
 
-    private final Context context;
+    private final LayoutInflater inflater;
     private final List<StateStatistic> states;
 
     public StateStatisticAdapter(Context context, List<StateStatistic> states){
         this.states = states;
-        this.context = context;
+        this.inflater = LayoutInflater.from(context);
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_statistic,null));
+        View view = inflater.inflate(R.layout.list_item_statistic,parent,false);
+        return new StateStatisticAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         StateStatistic state = states.get(position);
-        holder.correct.setText(state.getCorrect());
+        holder.correct.setText(String.valueOf(state.getCorrect()));
         holder.date.setText(state.getDate());
-        holder.mistakes.setText(state.getMistakes());
+        holder.mistakes.setText(String.valueOf(state.getMistakes()));
         holder.result.setText(state.getResult());
     }
 

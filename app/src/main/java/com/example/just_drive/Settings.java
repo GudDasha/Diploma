@@ -6,7 +6,9 @@ import static java.lang.Long.parseLong;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,14 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Settings extends AppCompatActivity {
     String quest;
-    long time;
+    String time;
     String topic;
     String help;
     String attempts;
     String[] time_mas = { "5", "10", "20"};
-    String[] attempts_mas  = { "1", "2", "3"};
-    String[] topics_mas  = { "1", "2"};
-    String[] quest_mas  = { "1", "5", "7"};
+    String[] attempts_mas  = { "0","1", "2", "3"};
+    String[] topics_mas  = { "Общие положения", "Дорожные знаки"};
+    String [] quest_mas  = { "1", "2"};
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         CheckBox check_help = (CheckBox) findViewById(R.id.check_help);
         AppCompatButton btn_auth = (AppCompatButton) findViewById(R.id.btn_auth);
+
 
         Spinner spinner_time = findViewById(R.id.spiner_time);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, time_mas);
@@ -58,13 +61,15 @@ public class Settings extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_quest.setAdapter(adapter3);
 
+
+
         //получение элемента списка количества вопросов
         AdapterView.OnItemSelectedListener itemSelectedListener_quest = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Получаем выбранный объект
-                String item = (String)parent.getItemAtPosition(position);
-                quest = item;
+                String item = (String) parent.getItemAtPosition(position);
+                quest =  item;
             }
 
             @Override
@@ -79,7 +84,7 @@ public class Settings extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Получаем выбранный объект
                 String item = (String)parent.getItemAtPosition(position);
-                time = Long.parseLong(item);
+                time = item;
             }
 
             @Override
@@ -134,7 +139,7 @@ public class Settings extends AppCompatActivity {
                     help = "нет";
                     i = new Intent(Settings.this,Bulet_Settings.class);
                     i.putExtra("help",help);
-                    i.putExtra("name",quest);
+                    i.putExtra("quest",quest);
                     i.putExtra("time",time);
                     i.putExtra("topic",topic);
                     i.putExtra("attempts",attempts);

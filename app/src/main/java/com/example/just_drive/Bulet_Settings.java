@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Bulet_Settings extends AppCompatActivity {
-    String quest;
+    int quest;
     long time;
     String topic;
     String help;
@@ -38,7 +39,6 @@ public class Bulet_Settings extends AppCompatActivity {
     private TextView question;
     private TextView questions;
     private ImageView img_quest;
-    //private static final long START_TIME_IN_MILLIS = 600000;
      private long mTimeLeftInMillis;
     private CountDownTimer mCountDownTimer;
     TextView timer;
@@ -50,7 +50,6 @@ public class Bulet_Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bulet_settings);
-       // final String name = getIntent().getStringExtra("name");
         TextView txt_name = (TextView) findViewById(R.id.name);
         txt_name.setText("Настроенная тренировка");
         timer = findViewById(R.id.timer);
@@ -64,10 +63,14 @@ public class Bulet_Settings extends AppCompatActivity {
         option4 = (AppCompatButton) findViewById(R.id.option4);
         btn_next = (AppCompatButton) findViewById(R.id.btn_next);
 
-        time = getIntent().getLongExtra("time",0);
+        String t = getIntent().getStringExtra("time");
+        time = Long.valueOf(t);
         mTimeLeftInMillis = time*60*1000;
+
+
         topic = getIntent().getStringExtra("topic");
-        quest =  getIntent().getStringExtra("quest");
+        String q = getIntent().getStringExtra("quest");
+        quest = Integer.valueOf( q);
 
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +93,8 @@ public class Bulet_Settings extends AppCompatActivity {
                 mCountDownTimer.cancel();
                 Toast.makeText(Bulet_Settings.this,"Время вышло",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Bulet_Settings.this,Result.class);
-                intent.putExtra("correct",getCorrectAnswers(quest));
-                intent.putExtra("incorrect",getIncorrectAnswers(quest));
+                intent.putExtra("correct",getCorrectAnswers());
+                intent.putExtra("incorrect",getIncorrectAnswers());
                 startActivity(intent);
                 finish();
             }
@@ -152,18 +155,14 @@ public class Bulet_Settings extends AppCompatActivity {
                 }
             }
         });
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        Query databaseReference = db.child("Lists").equalTo("Билет № 2/"+topic);
 
         ProgressDialog progressDialog = new ProgressDialog(Bulet_Settings.this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
+        FirebaseDatabase.getInstance().getReference().child("Settings").child(topic).limitToFirst(quest).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     final String getOption1 = dataSnapshot.child("option1").getValue(String.class);
                     final String getOption2  = dataSnapshot.child("option2").getValue(String.class);
@@ -176,14 +175,13 @@ public class Bulet_Settings extends AppCompatActivity {
                     questionLists.add(questionList1);}
                 progressDialog.hide();
 
-                questions.setText((currentQuestionPosition+1)+"/"+quest);
+                questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
                 question.setText(questionLists.get(0).getQuestion());
                 option1.setText(questionLists.get(0).getOption1());
                 option2.setText(questionLists.get(0).getOption2());
                 option3.setText(questionLists.get(0).getOption3());
                 option4.setText(questionLists.get(0).getOption4());
                 Picasso.get().load(questionLists.get(0).getImage()).into(img_quest);
-
             }
 
             @Override
@@ -199,7 +197,7 @@ public class Bulet_Settings extends AppCompatActivity {
                     Toast.makeText(Bulet_Settings.this,"Пожалуйста сделайте выбор",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    ChangeQuestion(quest);
+                    ChangeQuestion();
                 }
 
             }
@@ -209,15 +207,14 @@ public class Bulet_Settings extends AppCompatActivity {
     private void updateCountDownText(long mTimeLeftInMillis){
         int minutes = (int) mTimeLeftInMillis/1000/60;
         int seconds = (int) mTimeLeftInMillis/1000 % 60;
-
         String timeLeftFormatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
         timer.setText(timeLeftFormatted);
     }
     //метод для подсчёта корректных ответов
-    private int getCorrectAnswers (String size){
+    private int getCorrectAnswers (){
         int correctAnswers = 0;
 
-        for(int i = 0;i>parseInt(size);i++){
+        for(int i = 0;i>questionLists.size();i++){
             final String getUserSelectedAnswer = questionLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionLists.get(i).getAnswer();
 
@@ -230,10 +227,10 @@ public class Bulet_Settings extends AppCompatActivity {
     }
 
     //метод для подсчёта некорректных ответов
-    private int getIncorrectAnswers (String size){
+    private int getIncorrectAnswers (){
         int correctAnswers = 0;
 
-        for(int i = 0;i<parseInt(size);i++){
+        for(int i = 0;i<questionLists.size();i++){
             final String getUserSelectedAnswer = questionLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionLists.get(i).getAnswer();
 
@@ -272,13 +269,13 @@ public class Bulet_Settings extends AppCompatActivity {
         }
     }
 
-    private void ChangeQuestion(String size){
+    private void ChangeQuestion(){
         currentQuestionPosition++;
 
-        if((currentQuestionPosition+1) == parseInt(size)){
+        if((currentQuestionPosition+1) == questionLists.size()){
             btn_next.setText("Готово");
         }
-        if(currentQuestionPosition<parseInt(size)){
+        if(currentQuestionPosition<questionLists.size()){
             selectedOptionByUser = "";
             option1.setBackgroundResource(R.drawable.bulet_border_button);
             option1.setTextColor(Color.parseColor("#000000"));
@@ -292,7 +289,7 @@ public class Bulet_Settings extends AppCompatActivity {
             option4.setBackgroundResource(R.drawable.bulet_border_button);
             option4.setTextColor(Color.parseColor("#000000"));
 
-            questions.setText((currentQuestionPosition+1)+"/"+size);
+            questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
             question.setText(questionLists.get(currentQuestionPosition).getQuestion());
             option1.setText(questionLists.get(currentQuestionPosition).getOption1());
             option2.setText(questionLists.get(currentQuestionPosition).getOption2());
@@ -304,8 +301,8 @@ public class Bulet_Settings extends AppCompatActivity {
             Intent i = new Intent(Bulet_Settings.this, Result.class);
             String pass = "";
             i.putExtra("pass",pass);
-            i.putExtra("correct",getCorrectAnswers(size));
-            i.putExtra("incorrect",getIncorrectAnswers(size));
+            i.putExtra("correct",getCorrectAnswers());
+            i.putExtra("incorrect",getIncorrectAnswers());
             startActivity(i);
             finish();
         }

@@ -41,22 +41,16 @@ public class Result extends AppCompatActivity {
         //загрузка результатов в базу данных
         if(pass.equals("Экзамен сдан!")){
             txt_result.setText(pass);
-            Random random = new Random();
-            //int i = random.nextInt();
             Results newResult = new Results(date,"Экзамен", getCorrectAnswer, getIncorrectAnswer);
             writeResultToDB(newResult, "Экзамен");
         }
         else if(pass.equals("Экзамен не сдан!")){
             txt_result.setText(pass);
-            Random random = new Random();
-            //int i = random.nextInt();
             Results newResult = new Results(date,"Экзамен", getCorrectAnswer, getIncorrectAnswer);
             writeResultToDB(newResult, "Экзамен");
         }
         else if (pass.equals("")){
             txt_result.setText("");
-            Random random = new Random();
-            //int i = random.nextInt();
             Results newResult = new Results(date,"Тренировка", getCorrectAnswer, getIncorrectAnswer);
             writeResultToDB(newResult, name);
         }
