@@ -48,4 +48,8 @@
     <string name="back_to_main">Вернуться на главную</string>
     <string name="videos">Видеоуроки</string>
     <string name="statistic">Статистика</string>
+    <string name="password_forgot">Забыли пароль?</string>
+    <string name="set_email">Введите электронную почту</string>
+    <string name="send_password">Отправить пароль</string>
+    <string name="back">Назад</string>
 </resources>

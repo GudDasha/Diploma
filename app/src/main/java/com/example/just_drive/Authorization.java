@@ -2,6 +2,7 @@ package com.example.just_drive;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class Authorization extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorization);
         Button btn_reg = (Button) findViewById(R.id.btn_registration);
+        //переход на экран Регистрация
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,10 +40,20 @@ public class Authorization extends AppCompatActivity {
             }
         });
 
+
         email = (EditText) findViewById(R.id.login);
         password = (EditText) findViewById(R.id.password);
         btn_auth = (Button) findViewById(R.id.btn_auth);
         auth = FirebaseAuth.getInstance();
+        AppCompatButton btn_reset = findViewById(R.id.btn_reset);
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Authorization.this,Reset_Password.class);
+                startActivity(i);
+                finish();
+            }
+        });
         btn_auth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
