@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <FrameLayout
+    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="10dp">
+    <TextView
+        android:id="@+id/topic"
+        android:background="#6564A1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Тема"
+        android:paddingLeft="10dp"
+        android:textSize="20dp"
+        android:layout_gravity="left"
+        android:textStyle="bold"
+        android:textColor="@color/white"></TextView>
         <WebView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></WebView>
-    </FrameLayout>
+    </LinearLayout>

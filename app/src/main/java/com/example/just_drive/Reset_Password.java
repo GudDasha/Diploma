@@ -34,10 +34,12 @@ public class Reset_Password extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //проверка поля с электронной почтой на пустоту
                 if(email.getText().toString().equals("")){
                     Toast.makeText(Reset_Password.this,"Введите электронную почту",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    //ввод переменных
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     String emailAddress = email.getText().toString();
                     auth.sendPasswordResetEmail(emailAddress)

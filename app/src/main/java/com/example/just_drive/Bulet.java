@@ -122,13 +122,15 @@ public class Bulet extends AppCompatActivity {
                     }
                 }
             });
+            //получение экземпляра базы данных
             DatabaseReference db = FirebaseDatabase.getInstance().getReference();
             DatabaseReference databaseReference = db.child("Lists");
-
+            //добавление индикатора прогресса загрузки данных
             ProgressDialog progressDialog = new ProgressDialog(Bulet.this);
             progressDialog.setCancelable(false);
              progressDialog.setMessage("Loading...");
              progressDialog.show();
+             //получение данных
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -144,7 +146,7 @@ public class Bulet extends AppCompatActivity {
                         QuestionList questionList1 = new QuestionList(getOption1,getOption2,getOption3,getOption4,getQuestion,getAnswer, getImage,"");
                         questionLists.add(questionList1);}
                         progressDialog.hide();
-
+                    //присваиваем кнопкам полученные данные
                     questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
                     question.setText(questionLists.get(0).getQuestion());
                     option1.setText(questionLists.get(0).getOption1());
@@ -154,13 +156,11 @@ public class Bulet extends AppCompatActivity {
                     Picasso.get().load(questionLists.get(0).getImage()).into(img_quest);
 
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
             });
-//
 
 
             btn_next.setOnClickListener(new View.OnClickListener() {

@@ -29,6 +29,7 @@
             android:layout_weight="0.8"
             android:gravity="center|top">
             <TextView
+                android:textColor="#373333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ваш результат:"

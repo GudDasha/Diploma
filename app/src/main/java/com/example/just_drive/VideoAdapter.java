@@ -5,18 +5,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder> {
-    List<YoutubeVideo> youtubeVideoList;
+     List<StateVideo> VideoList;
     public VideoAdapter(){}
 
-    public VideoAdapter(List <YoutubeVideo> youtubeVideoList){
-        this.youtubeVideoList=youtubeVideoList;
+    public VideoAdapter(List <StateVideo> youtubeVideoList){
+        this.VideoList=youtubeVideoList;
+    }
+
+    public void setFilteredeList(List<StateVideo> filteredeList){
+        this.VideoList = filteredeList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -28,19 +35,23 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
 
     @Override
     public void onBindViewHolder(@NonNull VideoAdapter.VideoHolder holder, int position) {
-        holder.videoWeb.loadData(youtubeVideoList.get(position).getVideoUrl(),"text/html","utf-8");
+       StateVideo videolist = VideoList.get(position);
+        holder.videoWeb.loadData(VideoList.get(position).getVideoUrl(),"text/html","utf-8");
+        holder.topic.setText(videolist.getTopic());
     }
 
     @Override
     public int getItemCount() {
-        return youtubeVideoList.size();
+        return VideoList.size();
     }
 
 
     public class VideoHolder extends RecyclerView.ViewHolder {
         WebView videoWeb;
+        TextView topic;
         public VideoHolder(View itemview){
             super(itemview);
+            topic = itemview.findViewById(R.id.topic);
             videoWeb = (WebView) itemview.findViewById(R.id.videoview);
             videoWeb.getSettings().setJavaScriptEnabled(true);
             videoWeb.setWebChromeClient(new WebChromeClient());

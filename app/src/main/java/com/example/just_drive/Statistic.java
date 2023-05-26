@@ -21,10 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Statistic extends AppCompatActivity {
-   // StateStatisticAdapter adapter;
-    //String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private final List<StateStatistic> recyclerList = new ArrayList<StateStatistic>();
-   // private final DatabaseReference database = FirebaseDatabase.getInstance().getReference().child( "Users").child(currentUser);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
