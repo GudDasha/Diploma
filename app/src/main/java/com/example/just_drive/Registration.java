@@ -2,6 +2,7 @@ package com.example.just_drive;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,12 +32,23 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        EditText name_reg = (EditText) findViewById(R.id.reg_name);
-        email_regist = (EditText) findViewById(R.id.email_regist);
-        password_regist = (EditText) findViewById(R.id.password_rigist);
+        EditText name_reg = findViewById(R.id.reg_name);
+        email_regist = findViewById(R.id.email_regist);
+        password_regist = findViewById(R.id.password_rigist);
         regist = FirebaseAuth.getInstance();
 
-        Button btn_go_in = (Button) findViewById(R.id.go_in);
+        //переход на экран Тренировка
+        AppCompatButton btn_unauth = findViewById(R.id.btn_unauth);
+        btn_unauth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Registration.this,Training.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        Button btn_go_in =  findViewById(R.id.go_in);
         btn_go_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +58,8 @@ public class Registration extends AppCompatActivity {
                 String email = email_regist.getText().toString().trim();
                 String password = password_regist.getText().toString().trim();
                 //проверка условий регистрации
+                if(TextUtils.isEmpty(email)&&TextUtils.isEmpty(name)&&TextUtils.isEmpty(password)){
+                    Toast.makeText(Registration.this,"Введите данные",Toast.LENGTH_SHORT).show();}
                 if(TextUtils.isEmpty(email)){
                     Toast.makeText(Registration.this,"Введите электронную почту",Toast.LENGTH_SHORT).show();}
                 else if ( TextUtils.isEmpty(password)){
@@ -83,7 +97,7 @@ public class Registration extends AppCompatActivity {
             }
         });
 
-        to_auth = (Button) findViewById(R.id.btn_to_auth);
+        to_auth = findViewById(R.id.btn_to_auth);
         to_auth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

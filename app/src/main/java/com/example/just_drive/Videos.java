@@ -15,6 +15,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.Toast;
 
@@ -40,6 +41,17 @@ public class Videos extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclervideos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //возвращение на экран Обучение
+        ImageView img_back = findViewById(R.id.img_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(com.example.just_drive.Videos.this, MainFragments.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         //получение данных о видеороликах
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();

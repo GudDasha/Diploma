@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class Training extends AppCompatActivity {
@@ -26,6 +28,13 @@ public class Training extends AppCompatActivity {
         recyclerView=(RecyclerView) findViewById(R.id.list_bulets);
         btn_settings = (AppCompatButton) findViewById(R.id.btn_settings);
         back_main = (ImageView) findViewById(R.id.back_main);
+
+        //проверка авторизирован ли пользователь
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(currentUser==null){
+            btn_settings.setVisibility(View.INVISIBLE);
+        }
+
         //переход на экран настроек тестрования
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +57,7 @@ public class Training extends AppCompatActivity {
         });
 
         setInitialData();
+
         StateAdapter.OnStateClickListener stateClickListener = new StateAdapter.OnStateClickListener() {
             @Override
             public void onState(State state, int position) {

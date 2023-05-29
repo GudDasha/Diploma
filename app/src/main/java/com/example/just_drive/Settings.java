@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,31 +38,33 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         CheckBox check_help = (CheckBox) findViewById(R.id.check_help);
-        AppCompatButton btn_auth = (AppCompatButton) findViewById(R.id.btn_auth);
-
+        AppCompatButton btn_start = (AppCompatButton) findViewById(R.id.btn_start);
 
         Spinner spinner_time = findViewById(R.id.spiner_time);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, time_mas);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_time.setAdapter(adapter);
 
-        Spinner spinner_attempts = findViewById(R.id.spinner_attempts);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, attempts_mas);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_attempts.setAdapter(adapter1);
-
         Spinner spinner_topics = findViewById(R.id.spinner_topics);
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, topics_mas);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_topics.setAdapter(adapter2);
-
 
         Spinner spinner_quest = findViewById(R.id.spiner_quest);
         ArrayAdapter<String> adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, quest_mas);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_quest.setAdapter(adapter3);
 
-
+        //переход на экран Тренировка
+        ImageView btn_back = findViewById(R.id.back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Settings.this,Training.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         //получение элемента списка количества вопросов
         AdapterView.OnItemSelectedListener itemSelectedListener_quest = new AdapterView.OnItemSelectedListener() {
@@ -107,21 +110,8 @@ public class Settings extends AppCompatActivity {
         };
         spinner_topics.setOnItemSelectedListener(itemSelectedListener_topic);
 
-        //получение элемента списка количества попыток
-        AdapterView.OnItemSelectedListener itemSelectedListener_attempts = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Получаем выбранный объект
-                String item = (String)parent.getItemAtPosition(position);
-                attempts = item;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        };
-        spinner_attempts.setOnItemSelectedListener(itemSelectedListener_attempts);
 
-        btn_auth.setOnClickListener(new View.OnClickListener() {
+        btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //получение подсказок
@@ -131,7 +121,6 @@ public class Settings extends AppCompatActivity {
                     i.putExtra("quest",quest);
                     i.putExtra("time",time);
                     i.putExtra("topic",topic);
-                    i.putExtra("attempts",attempts);
                     startActivity(i);
                     finish();
                 }
@@ -142,7 +131,6 @@ public class Settings extends AppCompatActivity {
                     i.putExtra("quest",quest);
                     i.putExtra("time",time);
                     i.putExtra("topic",topic);
-                    i.putExtra("attempts",attempts);
                     startActivity(i);
                     finish();
                 }

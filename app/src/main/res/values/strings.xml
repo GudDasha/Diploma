@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Just_drive</string>
-    <string name="program_name">Just drive</string>
+    <string name="app_name">Гид по ПДД</string>
+    <string name="program_name">Гид по ПДД</string>
     <string name="icon_main">Главная</string>
     <string name="icon_study">Обучение</string>
     <string name="icon_schools">Автошколы</string>
@@ -52,4 +52,5 @@
     <string name="set_email">Введите электронную почту</string>
     <string name="send_password">Отправить пароль</string>
     <string name="back">Назад</string>
+    <string name="unauth">Войти без аккаунта</string>
 </resources>

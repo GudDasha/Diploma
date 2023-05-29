@@ -179,7 +179,6 @@ public class Bulet extends AppCompatActivity {
     //метод для подсчёта корректных ответов
     private int getCorrectAnswers (){
         int correctAnswers = 0;
-
         for(int i = 0;i<questionLists.size();i++){
             final String getUserSelectedAnswer = questionLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionLists.get(i).getAnswer();
@@ -188,14 +187,12 @@ public class Bulet extends AppCompatActivity {
                 correctAnswers++;
             }
         }
-
         return correctAnswers;
     }
 
     //метод для подсчёта некорректных ответов
     private int getIncorrectAnswers (){
         int correctAnswers = 0;
-
         for(int i = 0;i<questionLists.size();i++){
             final String getUserSelectedAnswer = questionLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionLists.get(i).getAnswer();
@@ -204,7 +201,6 @@ public class Bulet extends AppCompatActivity {
                 correctAnswers++;
             }
         }
-
         return correctAnswers;
     }
 

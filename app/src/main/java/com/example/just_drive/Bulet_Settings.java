@@ -35,7 +35,6 @@ public class Bulet_Settings extends AppCompatActivity {
     long time;
     String topic;
     String help;
-    String attempts;
     private TextView question;
     private TextView questions;
     private ImageView img_quest;

@@ -27,6 +27,4 @@ public class Results {
     public int getMistakes(){
         return mistakes;
     }
-
-
 }

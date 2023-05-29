@@ -58,6 +58,9 @@ public class Authorization extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //проверка полей ввода
+                if(email.getText().toString().equals("")&&password.getText().toString().equals("")){
+                    Toast.makeText(Authorization.this,"Введите данные",Toast.LENGTH_SHORT).show();
+                }
                 if(email.getText().toString().equals("")){
                     Toast.makeText(Authorization.this,"Введите электронную почту",Toast.LENGTH_SHORT).show();}
                 else if (password.getText().toString().equals("")){
@@ -78,7 +81,7 @@ public class Authorization extends AppCompatActivity {
                                         finish();
                                     }
                                     else{
-                                        Toast.makeText(Authorization.this,"Пользователь не авторизирован",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Authorization.this,"Пользователь не авторизован",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
