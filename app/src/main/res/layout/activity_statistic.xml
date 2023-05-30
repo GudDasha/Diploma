@@ -18,11 +18,18 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-
+            <ImageView
+                android:id="@+id/img_back_main"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="bottom|left"
+                android:background="@drawable/back"
+                android:layout_marginBottom="5dp"
+                android:layout_width="51dp"
+                android:layout_height="38dp"></ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+                android:layout_gravity="center|bottom"
                 android:text="@string/statistic"
                 android:textColor="#373333"
                 android:textSize="40dp"

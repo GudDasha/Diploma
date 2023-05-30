@@ -77,8 +77,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#373333"
+                android:textStyle="bold"
                 android:text="Описание вопроса"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:layout_gravity="center|top"></TextView>
         </FrameLayout>
         <LinearLayout
@@ -87,6 +88,7 @@
             android:layout_height="0dp"
             android:layout_weight="5.4">
             <androidx.appcompat.widget.AppCompatButton
+                android:background="@drawable/bulet_border_button"
                 android:textAllCaps="false"
                 android:id="@+id/option1"
                 android:layout_marginTop="20dp"
@@ -94,6 +96,7 @@
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
+                android:background="@drawable/bulet_border_button"
                 android:textAllCaps="false"
                 android:id="@+id/option2"
                 android:layout_marginTop="10dp"
@@ -101,6 +104,7 @@
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
+                android:background="@drawable/bulet_border_button"
                 android:textAllCaps="false"
                 android:id="@+id/option3"
                 android:layout_marginTop="10dp"
@@ -108,6 +112,7 @@
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
+                android:background="@drawable/bulet_border_button"
                 android:textAllCaps="false"
                 android:id="@+id/option4"
                 android:layout_marginTop="10dp"

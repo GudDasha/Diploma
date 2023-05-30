@@ -65,7 +65,7 @@ public class Bulet_Exam extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Bulet_Exam.this, Training.class);
+                Intent i = new Intent(Bulet_Exam.this, MainFragments.class);
                 startActivity(i);
                 finish();
             }});
@@ -116,10 +116,10 @@ public class Bulet_Exam extends AppCompatActivity {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference databaseReference = db.child("Lists");
 
-        ProgressDialog progressDialog = new ProgressDialog(Bulet_Exam.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        ProgressDialog progressDialog1 = new ProgressDialog(Bulet_Exam.this);
+        progressDialog1.setCancelable(false);
+        progressDialog1.setMessage("Loading...");
+        progressDialog1.show();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -134,7 +134,7 @@ public class Bulet_Exam extends AppCompatActivity {
                     final String getImage = dataSnapshot.child("image").getValue(String.class);
                     QuestionList questionList1 = new QuestionList(getOption1,getOption2,getOption3,getOption4,getQuestion,getAnswer, getImage,"");
                     questionLists.add(questionList1);}
-                progressDialog.hide();
+                progressDialog1.dismiss();
 
                 questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
                 question.setText(questionLists.get(0).getQuestion());

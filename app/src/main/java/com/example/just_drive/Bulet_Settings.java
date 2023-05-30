@@ -41,8 +41,8 @@ public class Bulet_Settings extends AppCompatActivity {
      private long mTimeLeftInMillis;
     private CountDownTimer mCountDownTimer;
     TextView timer;
-    AppCompatButton option1, option2, option3, option4, btn_next;
-    private final List<QuestionList> questionLists = new ArrayList<>();
+    AppCompatButton option1, option2, option3, option4, btn_next,btn_help;
+    private final List<Settings_QuestionList> questionLists = new ArrayList<>();
     private int currentQuestionPosition = 0;
     private String selectedOptionByUser = "";
     @Override
@@ -61,13 +61,23 @@ public class Bulet_Settings extends AppCompatActivity {
         option3 = (AppCompatButton) findViewById(R.id.option3);
         option4 = (AppCompatButton) findViewById(R.id.option4);
         btn_next = (AppCompatButton) findViewById(R.id.btn_next);
+        btn_help = findViewById(R.id.btn_help);
 
+        //получение наличия подсказок
+        help = getIntent().getStringExtra("help");
+        if(help.equals("да")){
+            btn_help.setVisibility(View.VISIBLE);
+        }
+
+        //получение времени
         String t = getIntent().getStringExtra("time");
         time = Long.valueOf(t);
         mTimeLeftInMillis = time*60*1000;
 
-
+        //получение темы
         topic = getIntent().getStringExtra("topic");
+
+        //получение количества вопросов
         String q = getIntent().getStringExtra("quest");
         quest = Integer.valueOf( q);
 
@@ -155,10 +165,10 @@ public class Bulet_Settings extends AppCompatActivity {
             }
         });
 
-        ProgressDialog progressDialog = new ProgressDialog(Bulet_Settings.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        ProgressDialog progressDialog3 = new ProgressDialog(Bulet_Settings.this);
+        progressDialog3.setCancelable(false);
+        progressDialog3.setMessage("Loading...");
+        progressDialog3.show();
         FirebaseDatabase.getInstance().getReference().child("Settings").child(topic).limitToFirst(quest).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -170,9 +180,10 @@ public class Bulet_Settings extends AppCompatActivity {
                     final String getQuestion = dataSnapshot.child("question").getValue(String.class);
                     final String getAnswer = dataSnapshot.child("answer").getValue(String.class);
                     final String getImage = dataSnapshot.child("image").getValue(String.class);
-                    QuestionList questionList1 = new QuestionList(getOption1,getOption2,getOption3,getOption4,getQuestion,getAnswer, getImage,"");
+                    final String getHelp = dataSnapshot.child("help").getValue(String.class);
+                    Settings_QuestionList questionList1 = new Settings_QuestionList(getOption1,getOption2,getOption3,getOption4,getQuestion,getAnswer, getImage,"", getHelp);
                     questionLists.add(questionList1);}
-                progressDialog.hide();
+                progressDialog3.dismiss();
 
                 questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
                 question.setText(questionLists.get(0).getQuestion());
@@ -181,6 +192,16 @@ public class Bulet_Settings extends AppCompatActivity {
                 option3.setText(questionLists.get(0).getOption3());
                 option4.setText(questionLists.get(0).getOption4());
                 Picasso.get().load(questionLists.get(0).getImage()).into(img_quest);
+                btn_help.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                       DialogFragment dialogFragment = new DialogFragment();
+                       Bundle args = new Bundle();
+                       args.putString("help",questionLists.get(0).getHelp());
+                       dialogFragment.setArguments(args);
+                       dialogFragment.show(getSupportFragmentManager(),"custom");
+                    }
+                });
             }
 
             @Override
@@ -295,6 +316,16 @@ public class Bulet_Settings extends AppCompatActivity {
             option3.setText(questionLists.get(currentQuestionPosition).getOption3());
             option4.setText(questionLists.get(currentQuestionPosition).getOption4());
             Picasso.get().load(questionLists.get(currentQuestionPosition).getImage()).into(img_quest);
+            btn_help.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogFragment dialogFragment = new DialogFragment();
+                    Bundle args = new Bundle();
+                    args.putString("help",questionLists.get(currentQuestionPosition).getHelp());
+                    dialogFragment.setArguments(args);
+                    dialogFragment.show(getSupportFragmentManager(),"custom");
+                }
+            });
         }
         else {
             Intent i = new Intent(Bulet_Settings.this, Result.class);

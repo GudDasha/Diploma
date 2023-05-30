@@ -145,7 +145,7 @@ public class Bulet extends AppCompatActivity {
                         final String getImage = dataSnapshot.child("image").getValue(String.class);
                         QuestionList questionList1 = new QuestionList(getOption1,getOption2,getOption3,getOption4,getQuestion,getAnswer, getImage,"");
                         questionLists.add(questionList1);}
-                        progressDialog.hide();
+                        progressDialog.dismiss();
                     //присваиваем кнопкам полученные данные
                     questions.setText((currentQuestionPosition+1)+"/"+questionLists.size());
                     question.setText(questionLists.get(0).getQuestion());

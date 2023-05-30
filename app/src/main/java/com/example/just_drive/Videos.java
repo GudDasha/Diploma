@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -52,7 +53,10 @@ public class Videos extends AppCompatActivity {
                 finish();
             }
         });
-
+        ProgressDialog progressDialog4 = new ProgressDialog(Videos.this);
+        progressDialog4.setCancelable(false);
+        progressDialog4.setMessage("Loading...");
+        progressDialog4.show();
         //получение данных о видеороликах
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference databaseReference = db.child("Videos");
@@ -66,6 +70,7 @@ public class Videos extends AppCompatActivity {
                     StateVideo state = new StateVideo(getTitle,"<iframe width=\"100%\" gravity=\"center\" height=\"100%\" src=\""+getUrl+"\" allowfullscreen></iframe>");
                     Videos.add(state);
                 }
+                progressDialog4.dismiss();
                 videoAdapter = new VideoAdapter(Videos);
                 recyclerView.setAdapter(videoAdapter);
             }

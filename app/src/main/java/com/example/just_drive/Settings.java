@@ -118,6 +118,7 @@ public class Settings extends AppCompatActivity {
                 if(check_help.isChecked()){
                     help = "да";
                     i = new Intent(Settings.this,Bulet_Settings.class);
+                    i.putExtra("help",help);
                     i.putExtra("quest",quest);
                     i.putExtra("time",time);
                     i.putExtra("topic",topic);

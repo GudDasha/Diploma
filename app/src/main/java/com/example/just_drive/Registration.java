@@ -37,16 +37,6 @@ public class Registration extends AppCompatActivity {
         password_regist = findViewById(R.id.password_rigist);
         regist = FirebaseAuth.getInstance();
 
-        //переход на экран Тренировка
-        AppCompatButton btn_unauth = findViewById(R.id.btn_unauth);
-        btn_unauth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Registration.this,Training.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
         Button btn_go_in =  findViewById(R.id.go_in);
         btn_go_in.setOnClickListener(new View.OnClickListener() {

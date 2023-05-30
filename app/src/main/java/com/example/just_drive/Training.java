@@ -29,12 +29,6 @@ public class Training extends AppCompatActivity {
         btn_settings = (AppCompatButton) findViewById(R.id.btn_settings);
         back_main = (ImageView) findViewById(R.id.back_main);
 
-        //проверка авторизирован ли пользователь
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        if(currentUser==null){
-            btn_settings.setVisibility(View.INVISIBLE);
-        }
-
         //переход на экран настроек тестрования
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
