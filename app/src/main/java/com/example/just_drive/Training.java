@@ -9,14 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class Training extends AppCompatActivity {
     ImageView back_main;
     String name = "";
+    String user;
     RecyclerView recyclerView;
     ArrayList<State> recyclerList = new ArrayList<State>();
     AppCompatButton btn_settings;
@@ -29,21 +32,36 @@ public class Training extends AppCompatActivity {
         btn_settings = (AppCompatButton) findViewById(R.id.btn_settings);
         back_main = (ImageView) findViewById(R.id.back_main);
 
+        //проверка наличия авторизированного пользователя
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            //возвращение на главный экран
+            back_main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Training.this, MainFragments.class);
+                    startActivity(i);
+                    finish();
+
+                }
+            });
+        } else {
+            btn_settings.setVisibility(View.INVISIBLE);
+            back_main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Training.this, Registration.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+        }
+
         //переход на экран настроек тестрования
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Training.this, Settings.class);
-                startActivity(i);
-                finish();
-
-            }
-        });
-        //возвращение на главный экран
-        back_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Training.this, MainFragments.class);
                 startActivity(i);
                 finish();
 

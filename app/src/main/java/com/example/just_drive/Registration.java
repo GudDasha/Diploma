@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +28,7 @@ public class Registration extends AppCompatActivity {
     private EditText password_regist;
     public final static Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-z-Z0-9._-]+@[a-z]+\\.+[a-z]+");
     private FirebaseAuth regist;
+    String user = "";
     DatabaseReference mDataBase = FirebaseDatabase.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,23 @@ public class Registration extends AppCompatActivity {
         email_regist = findViewById(R.id.email_regist);
         password_regist = findViewById(R.id.password_rigist);
         regist = FirebaseAuth.getInstance();
+        AppCompatButton btn_auth = findViewById(R.id.btn_unauth);
 
+        //проверка на наличие пользователя
+        btn_auth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    Toast.makeText(Registration.this,"Пользователь есть в системе",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registration.this,"Выйдите полностью из аккаунта",Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent i = new Intent(Registration.this, Training.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        });
 
         Button btn_go_in =  findViewById(R.id.go_in);
         btn_go_in.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +74,7 @@ public class Registration extends AppCompatActivity {
                     Toast.makeText(Registration.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
                 else if (TextUtils.isEmpty(name)){
-                    Toast.makeText(Registration.this,"Введите телефон",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registration.this,"Введите имя",Toast.LENGTH_SHORT).show();
                 }
 
                 else if (checkEmail(email_regist.getText().toString())==false){

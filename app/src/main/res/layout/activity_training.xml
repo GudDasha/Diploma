@@ -39,6 +39,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <androidx.appcompat.widget.AppCompatButton
+                android:visibility="visible"
                 android:id="@+id/btn_settings"
                 android:layout_gravity="center"
                 android:layout_width="300dp"
