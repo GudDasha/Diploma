@@ -29,9 +29,8 @@ public class Settings extends AppCompatActivity {
     String help;
     String attempts;
     String[] time_mas = { "5", "10", "20"};
-    String[] attempts_mas  = { "0","1", "2", "3"};
-    String[] topics_mas  = { "Общие положения", "Дорожные знаки"};
-    String [] quest_mas  = { "5", "10","20"};
+    String[] topics_mas  = { "Общие положения", "Дорожные знаки","Дорожная разметка", "Сигналы светофора и регулировщика","Начало движения, маневрирование" };
+    String [] quest_mas  = { "5", "10","15"};
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

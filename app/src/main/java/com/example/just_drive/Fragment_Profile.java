@@ -32,7 +32,7 @@ import java.util.List;
 
 public class Fragment_Profile extends Fragment {
     EditText name_profile;
-    EditText email;
+    EditText email_profile;
     EditText password;
     AppCompatButton sign_out;
     ImageView btn_save;
@@ -51,7 +51,7 @@ public class Fragment_Profile extends Fragment {
         List<User> users= new ArrayList<>();
         AppCompatButton btn_statistic = view.findViewById(R.id.btn_statistic);
         name_profile = view.findViewById(R.id.name_profile);
-        email = view.findViewById(R.id.email_profile);
+        email_profile = view.findViewById(R.id.email_profile);
         password = view.findViewById(R.id.password_profile);
         btn_save = view.findViewById(R.id.btn_save);
         sign_out = view.findViewById(R.id.sign_out);
@@ -76,7 +76,7 @@ public class Fragment_Profile extends Fragment {
                     User Name = snapshot.getValue(User.class);
                     name_profile.setText(Name.getName());
                     User Email = snapshot.getValue(User.class);
-                    email.setText(Email.getEmail());
+                    email_profile.setText(Email.getEmail());
                     User Password = snapshot.getValue(User.class);
                     password.setText(Password.getPassword());
             }
@@ -89,32 +89,37 @@ public class Fragment_Profile extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //сохранение в Realtime Database
-                String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Users").child(currentUser).child("email").setValue(email.getText().toString());
-                mDatabase.child("Users").child(currentUser).child("password").setValue(password.getText().toString());
-                mDatabase.child("Users").child(currentUser).child("name").setValue(name_profile.getText().toString());
-
-                //получение текущего пользователя
+                //проверка наличия авторизированного пользователя
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                //сохранение в Firebase Authentication
-                user.updateEmail(email.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                user.updatePassword(password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if (user != null) {
+                    //сохранение в Realtime Database
+                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child("Users").child(currentUser).child("email").setValue(email_profile.getText().toString());
+                    mDatabase.child("Users").child(currentUser).child("password").setValue(password.getText().toString());
+                    mDatabase.child("Users").child(currentUser).child("name").setValue(name_profile.getText().toString());
+                    //сохранение в Firebase Authentication
+                    user.updateEmail(email_profile.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                    user.updatePassword(password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(getContext(),"Данные не сохранены. Произошла ошибка",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

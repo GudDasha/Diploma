@@ -54,6 +54,11 @@ public class Result extends AppCompatActivity {
             Results newResult = new Results(date,"Тренировка", getCorrectAnswer, getIncorrectAnswer);
             writeResultToDB(newResult, name);
         }
+        else if(pass.equals("Настройка")){
+            txt_result.setText(pass);
+            Results newResult = new Results(date,"Настройка", getCorrectAnswer, getIncorrectAnswer);
+            writeResultToDB(newResult, name);
+        }
 
         //переход на экран Тренировки
         back_bulets.setOnClickListener(new View.OnClickListener() {

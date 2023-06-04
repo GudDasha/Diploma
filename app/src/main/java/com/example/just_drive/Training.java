@@ -86,6 +86,24 @@ public class Training extends AppCompatActivity {
                         i.putExtra("name",name);
                         startActivity(i);
                         finish();
+                    case "Билет № 3":
+                        name = state.getName();
+                        i = new Intent (Training.this, Bulet.class);
+                        i.putExtra("name",name);
+                        startActivity(i);
+                        finish();
+                    case "Билет № 4":
+                        name = state.getName();
+                        i = new Intent (Training.this, Bulet.class);
+                        i.putExtra("name",name);
+                        startActivity(i);
+                        finish();
+                    case "Билет № 5":
+                        name = state.getName();
+                        i = new Intent (Training.this, Bulet.class);
+                        i.putExtra("name",name);
+                        startActivity(i);
+                        finish();
                 }
 
             }
@@ -98,44 +116,9 @@ public class Training extends AppCompatActivity {
     private void setInitialData() {
         recyclerList.add(new State("Билет № 1"));
         recyclerList.add(new State("Билет № 2"));
-        recyclerList.add(new State("№ 3"));
-        recyclerList.add(new State("№ 4"));
-        recyclerList.add(new State("№ 5"));
-        recyclerList.add(new State("№ 6"));
-        recyclerList.add(new State("№ 7"));
-        recyclerList.add(new State("№ 8"));
-        recyclerList.add(new State("№ 9"));
-        recyclerList.add(new State("№ 10"));
-        recyclerList.add(new State("№ 11"));
-        recyclerList.add(new State("№ 12"));
-        recyclerList.add(new State("№ 13"));
-        recyclerList.add(new State("№ 14"));
-        recyclerList.add(new State("№ 15"));
-        recyclerList.add(new State("№ 16"));
-        recyclerList.add(new State("№ 17"));
-        recyclerList.add(new State("№ 18"));
-        recyclerList.add(new State("№ 19"));
-        recyclerList.add(new State("№ 20"));
-        recyclerList.add(new State("№ 21"));
-        recyclerList.add(new State("№ 22"));
-        recyclerList.add(new State("№ 23"));
-        recyclerList.add(new State("№ 24"));
-        recyclerList.add(new State("№ 25"));
-        recyclerList.add(new State("№ 26"));
-        recyclerList.add(new State("№ 27"));
-        recyclerList.add(new State("№ 28"));
-        recyclerList.add(new State("№ 29"));
-        recyclerList.add(new State("№ 30"));
-        recyclerList.add(new State("№ 31"));
-        recyclerList.add(new State("№ 32"));
-        recyclerList.add(new State("№ 33"));
-        recyclerList.add(new State("№ 34"));
-        recyclerList.add(new State("№ 35"));
-        recyclerList.add(new State("№ 36"));
-        recyclerList.add(new State("№ 37"));
-        recyclerList.add(new State("№ 38"));
-        recyclerList.add(new State("№ 39"));
-        recyclerList.add(new State("№ 40"));
+        recyclerList.add(new State("Билет № 3"));
+        recyclerList.add(new State("Билет № 4"));
+        recyclerList.add(new State("Билет № 5"));
 
     }
 }

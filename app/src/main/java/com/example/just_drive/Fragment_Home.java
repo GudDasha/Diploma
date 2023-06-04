@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 public class Fragment_Home  extends Fragment {
@@ -26,6 +27,16 @@ public class Fragment_Home  extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Button btn_training = (Button) view.findViewById(R.id.training);
         Button btn_exam = (Button) view.findViewById(R.id.btn_exam);
+        AppCompatButton btn_marathone = view.findViewById(R.id.btn_marathon);
+
+        //переход на экран Марафон
+        btn_marathone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(),Bulet_marathon.class);
+                startActivity(i);
+            }
+        });
         //переход на экран Тренировка
         btn_training.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +50,7 @@ public class Fragment_Home  extends Fragment {
             @Override
             public void onClick(View view) {
                 //рандомный выбор билета
-                String[] myString = new String[]{"Билет № 1","Билет № 2"};
+                String[] myString = new String[]{"Билет № 1","Билет № 2","Билет № 3","Билет № 4","Билет № 5"};
                 int n = (int)Math.floor(Math.random() * myString.length);
                 String name = myString[n].toString();
                 Intent i = new Intent (getContext(), Bulet_Exam.class);

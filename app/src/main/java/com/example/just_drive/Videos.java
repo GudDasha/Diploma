@@ -56,10 +56,11 @@ public class Videos extends AppCompatActivity {
         ProgressDialog progressDialog4 = new ProgressDialog(Videos.this);
         progressDialog4.setCancelable(false);
         progressDialog4.setMessage("Loading...");
-        progressDialog4.show();
+
         //получение данных о видеороликах
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference databaseReference = db.child("Videos");
+        progressDialog4.show();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -70,16 +71,18 @@ public class Videos extends AppCompatActivity {
                     StateVideo state = new StateVideo(getTitle,"<iframe width=\"100%\" gravity=\"center\" height=\"100%\" src=\""+getUrl+"\" allowfullscreen></iframe>");
                     Videos.add(state);
                 }
-                progressDialog4.dismiss();
                 videoAdapter = new VideoAdapter(Videos);
                 recyclerView.setAdapter(videoAdapter);
+                progressDialog4.dismiss();
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
 
         //поиск видероликов
         SearchView search = findViewById(R.id.edit_search);
