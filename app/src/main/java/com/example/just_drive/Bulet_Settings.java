@@ -235,7 +235,7 @@ public class Bulet_Settings extends AppCompatActivity {
     private int getCorrectAnswers (){
         int correctAnswers = 0;
 
-        for(int i = 0;i>questionLists.size();i++){
+        for(int i = 0;i<questionLists.size();i++){
             final String getUserSelectedAnswer = questionLists.get(i).getUserSelectedAnswer();
             final String getAnswer = questionLists.get(i).getAnswer();
 

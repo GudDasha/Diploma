@@ -73,6 +73,7 @@
                 android:text="@string/back_to_bulets"
                 android:textColor="@color/white"
                 android:padding="5dp"
+                android:visibility="visible"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/button_barder_lightblue"
                 android:layout_gravity="center"></androidx.appcompat.widget.AppCompatButton>
@@ -81,6 +82,7 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:padding="5dp"
+                android:visibility="visible"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_barder_lightblue"
                 android:text="@string/back_to_main"

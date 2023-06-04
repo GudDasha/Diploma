@@ -38,46 +38,64 @@ public class Result extends AppCompatActivity {
         incorrectAnswer.setText(String.valueOf("Неверные ответы: "+ getIncorrectAnswer));
         String pass =  getIntent().getStringExtra("pass");
         String name = getIntent().getStringExtra("name");
-        //загрузка результатов в базу данных
-        if(pass.equals("Экзамен сдан!")){
-            txt_result.setText(pass);
-            Results newResult = new Results(date,"Экзамен", getCorrectAnswer, getIncorrectAnswer);
-            writeResultToDB(newResult, "Экзамен");
+
+        FirebaseAuth currentUser = FirebaseAuth.getInstance();
+        if (currentUser.getCurrentUser() != null){
+            //загрузка результатов в базу данных
+            if(pass.equals("Экзамен сдан!")){
+                txt_result.setText(pass);
+                Results newResult = new Results(date,"Экзамен", getCorrectAnswer, getIncorrectAnswer);
+                writeResultToDB(newResult, "Экзамен");
+            }
+            else if(pass.equals("Экзамен не сдан!")){
+                txt_result.setText(pass);
+                Results newResult = new Results(date,"Экзамен", getCorrectAnswer, getIncorrectAnswer);
+                writeResultToDB(newResult, "Экзамен");
+            }
+            else if (pass.equals("")){
+                txt_result.setText("");
+                Results newResult = new Results(date,"Тренировка", getCorrectAnswer, getIncorrectAnswer);
+                writeResultToDB(newResult, name);
+            }
+            else if(pass.equals("Настройка")){
+                txt_result.setText(pass);
+                Results newResult = new Results(date,"Настройка", getCorrectAnswer, getIncorrectAnswer);
+                writeResultToDB(newResult, name);
+            }
+
+            //переход на экран Тренировки
+            back_bulets.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Result.this, Training.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+            //переход на главный экран
+            back_main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Result.this, MainFragments.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
         }
-        else if(pass.equals("Экзамен не сдан!")){
-            txt_result.setText(pass);
-            Results newResult = new Results(date,"Экзамен", getCorrectAnswer, getIncorrectAnswer);
-            writeResultToDB(newResult, "Экзамен");
-        }
-        else if (pass.equals("")){
-            txt_result.setText("");
-            Results newResult = new Results(date,"Тренировка", getCorrectAnswer, getIncorrectAnswer);
-            writeResultToDB(newResult, name);
-        }
-        else if(pass.equals("Настройка")){
-            txt_result.setText(pass);
-            Results newResult = new Results(date,"Настройка", getCorrectAnswer, getIncorrectAnswer);
-            writeResultToDB(newResult, name);
+        else{
+            back_main.setVisibility(View.INVISIBLE);
+            back_bulets.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Result.this, Training.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
         }
 
-        //переход на экран Тренировки
-        back_bulets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Result.this, Training.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        //переход на главный экран
-        back_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Result.this, MainFragments.class);
-                startActivity(i);
-                finish();
-            }
-        });
+
+
     }
 
     @Override
