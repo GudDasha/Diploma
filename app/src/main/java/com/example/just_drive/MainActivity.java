@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
             public void run(){
                 try{
                     super.run();
+                    FirebaseAuth currentUser = FirebaseAuth.getInstance();
+                    if (currentUser.getCurrentUser() != null)
+                        currentUser.signOut();
                     sleep(4000);
                 } catch (Exception e){}
                 finally {

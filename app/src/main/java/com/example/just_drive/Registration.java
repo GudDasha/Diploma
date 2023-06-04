@@ -79,8 +79,7 @@ public class Registration extends AppCompatActivity {
                 else if (checkEmail(email_regist.getText().toString())==false){
                     Toast.makeText(Registration.this,"Некорректная электронная почта",Toast.LENGTH_SHORT).show();
                 }
-
-                if (!TextUtils.isEmpty(password) && password.length()<6){
+                else if (!TextUtils.isEmpty(password) && password.length()<6){
                     Toast.makeText(Registration.this,"Минимальная длина пароля 6 цифр",Toast.LENGTH_SHORT).show();
                 }
                 //регистрация пользователя
