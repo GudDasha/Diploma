@@ -81,7 +81,7 @@ public class Authorization extends AppCompatActivity {
                                         finish();
                                     }
                                     else{
-                                        Toast.makeText(Authorization.this,"Пользователь не авторизован",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Authorization.this,"Неверный логин или пароль",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
