@@ -130,6 +130,7 @@ public class Fragment_Profile extends Fragment {
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 Intent intent = new Intent(getContext(),Authorization.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

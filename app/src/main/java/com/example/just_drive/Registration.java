@@ -26,6 +26,7 @@ public class Registration extends AppCompatActivity {
     Button to_auth;
     private EditText email_regist;
     private EditText password_regist;
+    private EditText repeat_password;
     public final static Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-z-Z0-9._-]+@[a-z]+\\.+[a-z]+");
     private FirebaseAuth regist;
     String user = "";
@@ -37,6 +38,7 @@ public class Registration extends AppCompatActivity {
         EditText name_reg = findViewById(R.id.reg_name);
         email_regist = findViewById(R.id.email_regist);
         password_regist = findViewById(R.id.password_rigist);
+        repeat_password = findViewById(R.id.repeatPassword);
         regist = FirebaseAuth.getInstance();
         AppCompatButton btn_auth = findViewById(R.id.btn_unauth);
 
@@ -65,6 +67,7 @@ public class Registration extends AppCompatActivity {
                 String name = name_reg.getText().toString().trim();
                 String email = email_regist.getText().toString().trim();
                 String password = password_regist.getText().toString().trim();
+                String repeatPassword = repeat_password.getText().toString().trim();
                 //проверка условий регистрации
                 if(TextUtils.isEmpty(email)&&TextUtils.isEmpty(name)&&TextUtils.isEmpty(password)){
                     Toast.makeText(Registration.this,"Введите данные",Toast.LENGTH_SHORT).show();}
@@ -73,6 +76,9 @@ public class Registration extends AppCompatActivity {
                 else if ( TextUtils.isEmpty(password)){
                     Toast.makeText(Registration.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
+                else if ( TextUtils.isEmpty(repeatPassword)){
+                    Toast.makeText(Registration.this,"Повторите пароль",Toast.LENGTH_SHORT).show();
+                }
                 else if (TextUtils.isEmpty(name)){
                     Toast.makeText(Registration.this,"Введите имя",Toast.LENGTH_SHORT).show();
                 }
@@ -80,7 +86,10 @@ public class Registration extends AppCompatActivity {
                     Toast.makeText(Registration.this,"Некорректная электронная почта",Toast.LENGTH_SHORT).show();
                 }
                 else if (!TextUtils.isEmpty(password) && password.length()<6){
-                    Toast.makeText(Registration.this,"Минимальная длина пароля 6 цифр",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registration.this,"Минимальная длина пароля 6 символов",Toast.LENGTH_SHORT).show();
+                }
+                else if (!password.matches(repeatPassword)) {
+                    Toast.makeText(Registration.this,"Пароли не совпадают",Toast.LENGTH_SHORT).show();
                 }
                 //регистрация пользователя
                 else {

@@ -36,6 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <EditText
+                android:singleLine="true"
                 android:id="@+id/login"
                 android:textSize="20dp"
                 android:textColorHint="@color/white"
@@ -48,9 +49,10 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></EditText>
+                android:layout_height="match_parent"/>
             <EditText
-                android:inputType="numberPassword"
+                android:singleLine="true"
+                android:inputType="textPassword"
                 android:id="@+id/password"
                 android:textSize="20dp"
                 android:hint="@string/password"
@@ -62,7 +64,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></EditText>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
         <LinearLayout
