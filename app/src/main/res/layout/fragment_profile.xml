@@ -63,6 +63,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <EditText
+                android:singleLine="true"
                 android:id="@+id/name_profile"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -92,6 +93,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <EditText
+                android:singleLine="true"
                 android:id="@+id/email_profile"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -123,6 +125,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <EditText
+                android:singleLine="true"
                 android:id="@+id/password_profile"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
