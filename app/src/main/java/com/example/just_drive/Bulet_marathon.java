@@ -161,7 +161,7 @@ public class Bulet_marathon extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedOptionByUser.isEmpty()){
-                    Toast.makeText(Bulet_marathon.this,"Пожалуйста сделайте выбор",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Bulet_marathon.this,"Выберите вариант ответа",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     ChangeQuestion();

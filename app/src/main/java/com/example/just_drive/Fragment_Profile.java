@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Fragment_Profile extends Fragment {
     EditText name_profile;
@@ -40,6 +42,7 @@ public class Fragment_Profile extends Fragment {
     public Fragment_Profile(){
         super(R.layout.fragment_profile);
     }
+    public final static Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-z-Z0-9._-]+@[a-z]+\\.+[a-z]+");
     public static Fragment_Profile newInstance(){
         return new Fragment_Profile();
     }
@@ -92,33 +95,69 @@ public class Fragment_Profile extends Fragment {
                 //проверка наличия авторизированного пользователя
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
-                    //сохранение в Realtime Database
-                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("Users").child(currentUser).child("email").setValue(email_profile.getText().toString());
-                    mDatabase.child("Users").child(currentUser).child("password").setValue(password.getText().toString());
-                    mDatabase.child("Users").child(currentUser).child("name").setValue(name_profile.getText().toString());
-                    //сохранение в Firebase Authentication
-                    user.updateEmail(email_profile.getText().toString())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
+                    //проверка полей ввода
+                    if(email_profile.getText().toString().equals("")&&password.getText().toString().equals("")&&name_profile.getText().toString().equals("")){
+                        Toast.makeText(getContext(),"Введите данные",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(name_profile.getText().toString().equals("")){
+                        Toast.makeText(getContext(),"Введите имя",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(email_profile.getText().toString().equals("")){
+                        Toast.makeText(getContext(),"Введите электронную почту",Toast.LENGTH_SHORT).show();}
+                    else if (checkEmail(email_profile.getText().toString())==false){
+                        Toast.makeText(getContext(),"Некорректная электронная почта",Toast.LENGTH_SHORT).show();
+                    }
+                    else if (password.getText().toString().equals("")){
+                        Toast.makeText(getContext(),"Введите пароль",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(password.length()<6){
+                        Toast.makeText(getContext(),"Минимальная длина пароля 6 символов",Toast.LENGTH_SHORT).show();
+                    }
+
+                    else{
+                        //сохранение в Realtime Database
+                        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                        mDatabase.child("Users").child(currentUser).child("email").setValue(email_profile.getText().toString());
+                        mDatabase.child("Users").child(currentUser).child("password").setValue(password.getText().toString());
+                        mDatabase.child("Users").child(currentUser).child("name").setValue(name_profile.getText().toString());
+
+                        //сохранение в Firebase Authentication
+                        user.updateEmail(email_profile.getText().toString().trim())
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            user.updatePassword(password.getText().toString().trim())
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()){
+                                                                //авторизация пользователя
+                                                                firebaseAuth.signInWithEmailAndPassword(email_profile.getText().toString(),password.getText().toString())
+                                                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                if(task.isSuccessful()){
+                                                                                    Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
+                                                                                }
+
+                                                                            }
+                                                                        });
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                        else{
+                                            Toast.makeText(getContext(),"Вы превысили количество попыток изменения данных. Перезагрузите приложение",Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }
-                                }
-                            });
-                    user.updatePassword(password.getText().toString())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                });
+
+                    }
                 }
-                else {
-                    Toast.makeText(getContext(),"Данные не сохранены. Произошла ошибка",Toast.LENGTH_SHORT).show();
-                }
+
 
             }
         });
@@ -135,5 +174,8 @@ public class Fragment_Profile extends Fragment {
             }
         });
         return view;
+    }
+    public static boolean checkEmail(String email){
+        return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
     }
 }

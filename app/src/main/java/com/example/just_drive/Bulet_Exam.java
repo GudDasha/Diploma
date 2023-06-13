@@ -31,7 +31,7 @@ public class Bulet_Exam extends AppCompatActivity {
     private TextView question;
     private TextView questions;
     private ImageView img_quest;
-    private static final long START_TIME_IN_MILLIS = 600000;
+    private static final long START_TIME_IN_MILLIS = 1200000;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     private CountDownTimer mCountDownTimer;
     TextView timer;
@@ -155,7 +155,7 @@ public class Bulet_Exam extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedOptionByUser.isEmpty()){
-                    Toast.makeText(Bulet_Exam.this,"Пожалуйста сделайте выбор",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Bulet_Exam.this,"Выберите вариант ответа",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     ChangeQuestion();

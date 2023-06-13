@@ -61,7 +61,7 @@ public class Authorization extends AppCompatActivity {
                 if(email.getText().toString().equals("")&&password.getText().toString().equals("")){
                     Toast.makeText(Authorization.this,"Введите данные",Toast.LENGTH_SHORT).show();
                 }
-                if(email.getText().toString().equals("")){
+                else if(email.getText().toString().equals("")){
                     Toast.makeText(Authorization.this,"Введите электронную почту",Toast.LENGTH_SHORT).show();}
                 else if (password.getText().toString().equals("")){
                     Toast.makeText(Authorization.this,"Введите пароль",Toast.LENGTH_SHORT).show();

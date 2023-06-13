@@ -2,15 +2,17 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_margin="15dp"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
 
     <LinearLayout
         android:background="@drawable/main_fragment_border"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="match_parent"
         android:weightSum="2"
         android:orientation="horizontal">

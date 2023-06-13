@@ -93,7 +93,9 @@
                 android:id="@+id/option1"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:layout_width="365dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
                 android:background="@drawable/bulet_border_button"
@@ -101,7 +103,9 @@
                 android:id="@+id/option2"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_width="365dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
                 android:background="@drawable/bulet_border_button"
@@ -109,7 +113,9 @@
                 android:id="@+id/option3"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_width="365dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
                 android:background="@drawable/bulet_border_button"
@@ -117,7 +123,9 @@
                 android:id="@+id/option4"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:layout_width="365dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatButton>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_next"
@@ -125,7 +133,9 @@
                 android:textSize="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center"
-                android:layout_width="365dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="53dp"></androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>
     </LinearLayout>

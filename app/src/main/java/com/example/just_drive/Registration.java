@@ -71,8 +71,11 @@ public class Registration extends AppCompatActivity {
                 //проверка условий регистрации
                 if(TextUtils.isEmpty(email)&&TextUtils.isEmpty(name)&&TextUtils.isEmpty(password)){
                     Toast.makeText(Registration.this,"Введите данные",Toast.LENGTH_SHORT).show();}
-                if(TextUtils.isEmpty(email)){
+                else if(TextUtils.isEmpty(email)){
                     Toast.makeText(Registration.this,"Введите электронную почту",Toast.LENGTH_SHORT).show();}
+                else if (checkEmail(email_regist.getText().toString())==false){
+                    Toast.makeText(Registration.this,"Некорректная электронная почта",Toast.LENGTH_SHORT).show();
+                }
                 else if ( TextUtils.isEmpty(password)){
                     Toast.makeText(Registration.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
@@ -82,9 +85,7 @@ public class Registration extends AppCompatActivity {
                 else if (TextUtils.isEmpty(name)){
                     Toast.makeText(Registration.this,"Введите имя",Toast.LENGTH_SHORT).show();
                 }
-                else if (checkEmail(email_regist.getText().toString())==false){
-                    Toast.makeText(Registration.this,"Некорректная электронная почта",Toast.LENGTH_SHORT).show();
-                }
+
                 else if (!TextUtils.isEmpty(password) && password.length()<6){
                     Toast.makeText(Registration.this,"Минимальная длина пароля 6 символов",Toast.LENGTH_SHORT).show();
                 }

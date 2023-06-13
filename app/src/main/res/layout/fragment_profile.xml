@@ -125,6 +125,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <EditText
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:id="@+id/password_profile"
                 android:layout_width="300dp"

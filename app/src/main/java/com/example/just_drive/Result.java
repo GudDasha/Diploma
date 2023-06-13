@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class Result extends AppCompatActivity {
+
     DatabaseReference mDataBase = FirebaseDatabase.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class Result extends AppCompatActivity {
             }
             else if (pass.equals("")){
                 txt_result.setText("");
-                Results newResult = new Results(date,"Тренировка", getCorrectAnswer, getIncorrectAnswer);
+                Results newResult = new Results(date,name, getCorrectAnswer, getIncorrectAnswer);
                 writeResultToDB(newResult, name);
             }
             else if(pass.equals("Настройка")){

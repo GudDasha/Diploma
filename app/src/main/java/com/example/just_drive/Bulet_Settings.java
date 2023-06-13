@@ -215,7 +215,7 @@ public class Bulet_Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedOptionByUser.isEmpty()){
-                    Toast.makeText(Bulet_Settings.this,"Пожалуйста сделайте выбор",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Bulet_Settings.this,"Выберите вариант ответа",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     ChangeQuestion();
