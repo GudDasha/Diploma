@@ -128,18 +128,20 @@ public class Fragment_Profile extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
                                             user.updatePassword(password.getText().toString().trim())
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()){
+                                                                Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
                                                                 //авторизация пользователя
                                                                 firebaseAuth.signInWithEmailAndPassword(email_profile.getText().toString(),password.getText().toString())
                                                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                                             @Override
                                                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                                                 if(task.isSuccessful()){
-                                                                                    Toast.makeText(getContext(),"Данные сохранены",Toast.LENGTH_SHORT).show();
+                                                                                    
                                                                                 }
 
                                                                             }
