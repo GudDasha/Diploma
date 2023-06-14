@@ -141,7 +141,7 @@ public class Fragment_Profile extends Fragment {
                                                                             @Override
                                                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                                                 if(task.isSuccessful()){
-                                                                                    
+
                                                                                 }
 
                                                                             }
